@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Population Prediction App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Population Prediction App</h1>
+    <form method="POST" action="/predict">
+        <div class="form-inputs">
+            <label for="country">Select a Country</label>
+            <select id="country" name="country">
+                {% for country, number in countries.items() %}
+                    <option value="{{ number }}">{{ country }} ({{ number }})</option>
+                {% endfor %}
+            </select>
+            <br>
+            <label for="yearly_change"><h3>Yearly Change</h3></label>
+            <input type="number" id="yearly_change" name="yearly_change" step="0.01" >
+            <br>
+            <label for="net_change">Net Change</label>
+            <input type="number" id="net_change" name="net_change" step="0.01" >
+            <br>
+            <label for="density">Density (P/Km²)</label>
+            <input type="number" id="density" name="density" step="0.01" >
+            <br>
+            <label for="land_area">Land Area (Km²)</label>
+            <input type="number" id="land_area" name="land_area" step="0.01" >
+            <br>
+            <label for="migrants">Migrants (net)</label>
+            <input type="number" id="migrants" name="migrants" step="0.01" >
+            <br>
+            <label for="fertility_rate">Fertility Rate</label>
+            <input type="number" id="fertility_rate" name="fertility_rate" step="0.01">
+            <br>
+            <label for="median_age">Median Age</label>
+            <input type="number" id="median_age" name="median_age" step="0.01">
+            <br>
+            <label for="urban_pop">Urban Pop %</label>
+            <input type="number" id="urban_pop" name="urban_pop" step="0.01" >
+            <br>
+            <label for="world_share">World Share</label>
+            <input type="number" id="world_share" name="world_share" step="0.01" >
+            <br>
+        </div>
+        <input type="submit" value="Predict">
+    </form>
+    {% if prediction %}
+        <div class="prediction">Predicted Population: {{ prediction }}</div>
+    {% endif %}
+</body>
+</html>
